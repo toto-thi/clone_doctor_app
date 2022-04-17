@@ -1,7 +1,10 @@
+import 'package:clone_doctor/utils/category_card.dart';
+import 'package:clone_doctor/utils/doctor_card.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -55,8 +58,8 @@ class _HomePageState extends State<HomePage> {
             ),
 
             const SizedBox(height: 25.0),
-            //card -> how do you feel?
 
+            //card -> how do you feel?
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Container(
@@ -69,7 +72,8 @@ class _HomePageState extends State<HomePage> {
                   Container(
                     height: 100,
                     width: 100,
-                    color: Colors.deepPurple,
+                    child: Lottie.network(
+                        'https://assets3.lottiefiles.com/packages/lf20_tutvdkg0.json'),
                   ),
                   const SizedBox(
                     width: 20.0,
@@ -106,13 +110,108 @@ class _HomePageState extends State<HomePage> {
                   )
                 ]),
               ),
-            )
+            ),
 
+            const SizedBox(
+              height: 25.0,
+            ),
             // search bar
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Container(
+                padding: const EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple[100],
+                    borderRadius: BorderRadius.circular(12.0)),
+                child: const TextField(
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      border: InputBorder.none,
+                      hintText: 'How can we help you?'),
+                ),
+              ),
+            ),
+
+            const SizedBox(
+              height: 25.0,
+            ),
 
             // horizontal list view -> categories list
+            Container(
+              height: 80,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: const [
+                  CategoryCard(
+                    categoryName: 'Dentist',
+                    iconImagePath: 'lib/icons/tooth.png',
+                  ),
+                  CategoryCard(
+                    categoryName: 'Surgeon',
+                    iconImagePath: 'lib/icons/surgeon.png',
+                  ),
+                  CategoryCard(
+                    categoryName: 'Pharmacist',
+                    iconImagePath: 'lib/icons/medicine.png',
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(
+              height: 25.0,
+            ),
 
             // doctor list
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Doctor List',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                  ),
+                  Text(
+                    'See all',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[500],
+                        fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 25.0,
+            ),
+
+            //card
+            Expanded(
+              child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: const [
+                DoctorCard(
+                  doctorImagePath: "lib/images/doctor1.jpg",
+                  doctorName: 'Dr. Arlene McCoy',
+                  rating: '4.8',
+                  doctorProfession: 'Therepist 7 y.e',
+                ),
+                DoctorCard(
+                  doctorImagePath: "lib/images/doctor2.jpg",
+                  doctorName: 'Dr. Ganesh Gupta',
+                  rating: '4.9',
+                  doctorProfession: 'Surgeon 6 y.e',
+                ),
+                DoctorCard(
+                  doctorImagePath: "lib/images/doctor3.jpg",
+                  doctorName: 'Dr. Toto Thii',
+                  rating: '4.7',
+                  doctorProfession: 'Psycologist 8 y.e',
+                ),
+              ],
+            ))
           ],
         ),
       ),
